@@ -25,8 +25,13 @@ public class Player {
         this.score = score;
     }
     
+    public Player (Player obj){
+        SetName(obj.GetName());
+        SetScore(obj.GetScore());
+    }
+    
     public String SetName(String name){
-        Pattern p = Pattern.compile("^[A-Z]{1}[a-z]{3,9}");
+        Pattern p = Pattern.compile("^[A-Z]{1}[a-z]{2,9}");
         Matcher m = p.matcher(name);
         
         if(m.matches()){
@@ -34,6 +39,10 @@ public class Player {
             return "Valid name";
         }
         else return "Invalid name";
+    }
+    public void SetScore(int score){
+        if(score>0)
+            this.score = score;
     }
     
     public String GetName(){

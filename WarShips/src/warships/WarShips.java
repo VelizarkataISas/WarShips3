@@ -6,6 +6,7 @@ package warships;
 
 //import java.util.Scanner;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
@@ -18,7 +19,7 @@ public class WarShips {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
         
@@ -30,8 +31,10 @@ public class WarShips {
         BigShip test2 = new BigShip(grid);
         MediumShip test3 = new MediumShip(grid);
         MediumShip test4 = new MediumShip(grid);
+        
                 
         test.PlaceParts(grid);
+        Scoreboard Score = new Scoreboard();
         //test2.PlaceParts(grid);
         //test3.PlaceParts(grid);
         //test4.PlaceParts(grid);
@@ -54,9 +57,11 @@ public class WarShips {
             }
             if(br == grid.length * grid.length){
                 empty = true;
-                System.out.println(Player1.toString());
+                //System.out.println(Player1.toString());
             }
         }
+        
+        Score.AddNSort(Player1);
 
  
     }
