@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package warships;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,20 +50,20 @@ public class Player {
         return score;
     }
     
-    public String Guess(int x, int y, ShipParts[][] grid){
+    public String Guess(int x, int y, ShipParts[][] grid){ //малко по-лесно да ми е да правя проверките
         try{
             if(grid[x][y] != null){
-                grid[x][y] = null;
-                score++;
-                return "Hit !";
+                //grid[x][y] = null;
+                //score++;
+                return "h";
             }
             else {
-                score++;
-                return "Miss !"; 
+                //score++;
+                return "m";
             }
         }
         catch(ArrayIndexOutOfBoundsException e){
-            return "Invalid coordinates";
+            return "i";
         }
     }
     

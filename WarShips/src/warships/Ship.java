@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package warships;
-
 import java.util.Random;
-
-/**
- *
- * @author scarf
- */
 public class Ship {
     private int length;
     private ShipParts[][] grid;
     
     public Ship(){
         length = 2;
-        grid = new ShipParts[8][8];
+        grid = new ShipParts[10][10];
     }
     public Ship(int length, ShipParts grid[][]){
         SetLength(length);

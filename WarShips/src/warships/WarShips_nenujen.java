@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author scarf
  */
-public class WarShips {
+public class WarShips_nenujen {
 
     /**
      * @param args the command line arguments
