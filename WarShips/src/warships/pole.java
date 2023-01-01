@@ -236,7 +236,7 @@ public void hiks (int x,int y,Graphics g)
                points.setText(b);
                if (brc==14)
                {
-                   String ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-11 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
+                   String ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-10 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
                    while (Ligma.SetName(ime).equals("Invalid name"))
                    {
                        JOptionPane.showMessageDialog(null, "Виж критериите и опитай пак","Невалидно име",JOptionPane.WARNING_MESSAGE);
