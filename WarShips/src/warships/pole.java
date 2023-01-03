@@ -3,6 +3,7 @@ package warships;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -216,8 +217,21 @@ public void hiks (int x,int y,Graphics g)
        Graphics g=grid.getGraphics();
        g.setColor(Color.red);
        String v="";
-           int x=Integer.parseInt(xV);
-           int y=Integer.parseInt(yV);
+       int x;
+       int y;
+       try{
+           x=Integer.parseInt(xV);
+           y=Integer.parseInt(yV);
+       }
+       catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
+           return;
+       }
+       catch(InputMismatchException e){
+           JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
+           return;
+       }
+           
            int brm=0;
                for (int i=0;i<br;i++)
                {
