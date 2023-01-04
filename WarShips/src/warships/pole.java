@@ -295,6 +295,14 @@ public void hiks (int x,int y,Graphics g)
     mS.PlaceParts(sP);
     mS.PlaceParts(sP);
     bS.PlaceParts(sP);
+    
+    for(int i = 0; i<sP.length; i++){
+        for(int k = 0; k<sP.length; k++){
+            if(sP[i][k] != null)System.out.print("1 ");
+            else if(sP[i][k] == null)System.out.print("0 ");
+        }
+        System.out.println("");
+    }
 //    for (int i=0;i<10;i++)
 //    {
 //       for (int j=0;j<10;j++)
