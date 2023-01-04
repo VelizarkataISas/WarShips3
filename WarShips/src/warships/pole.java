@@ -4,45 +4,37 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class pole extends javax.swing.JFrame {
+    
 private ShipParts sP[][]=new ShipParts[10][10];
 private Player Ligma=new Player();
 private SmallShip sS=new SmallShip(sP);
 private MediumShip mS=new MediumShip(sP);
 private BigShip bS=new BigShip(sP);
 private int brc=0;
-private int xM[]=new int[100];
-private int yM[]=new int[100];
+private int pr[]=new int[100];
 private int br=0;
+
 public void cherti()
 {
-    
-                int y=grid.getHeight();
-                int x=grid.getWidth();
-                System.out.println(x);
-                Graphics g=grid.getGraphics();
-                g.setColor(Color.black);
-                for (int i=0;i<=x;i+=x/40)
-                {
-                    for (int j=0;j<=y;j+=y/40)
-                    {
-                        g.drawLine(i,j,i,y);
-                        g.drawLine(i, j, x, j);
-                    }
-                }
+    int y=grid.getHeight();
+    int x=grid.getWidth();
+    Graphics g=grid.getGraphics();
+    g.setColor(Color.black);
+    for (int i=0;i<=x;i+=40)
+        for (int j=0;j<=y;j+=40)
+        {
+            g.drawLine(i,j,i,y);
+            g.drawLine(i, j, x, j);
+        }
 }
 public void circle (int x,int y,Graphics g)
 {
-     x=(x-1)*40;
+    x=(x-1)*40;
     y=(y-1)*40;
-    g.drawOval(y,x,38,38);
+    g.drawOval(y,x,40,40);
 }
 public void hiks (int x,int y,Graphics g)
 {
@@ -54,8 +46,9 @@ public void hiks (int x,int y,Graphics g)
     g.drawLine(x,y,x-18,y-18);
     g.drawLine(x,y,x-18,y+18);
 }
+
     public pole() {
-        initComponents();
+     initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -106,6 +99,7 @@ public void hiks (int x,int y,Graphics g)
         });
 
         shoot.setText("SCHEIẞEN*");
+        shoot.setEnabled(false);
         shoot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 shootActionPerformed(evt);
@@ -204,144 +198,130 @@ public void hiks (int x,int y,Graphics g)
     }// </editor-fold>//GEN-END:initComponents
 
     private void xCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCorActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_xCorActionPerformed
 
     private void yCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yCorActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_yCorActionPerformed
 
     private void shootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootActionPerformed
-       String xV=xCor.getText();
-       String yV=yCor.getText();
-       Graphics g=grid.getGraphics();
-       g.setColor(Color.red);
-       String v="";
-       int x;
-       int y;
-       try{
-           x=Integer.parseInt(xV);
-           y=Integer.parseInt(yV);
-       }
-       catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
-           return;
-       }
-       catch(InputMismatchException e){
-           JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
-           return;
-       }
-           
-           int brm=0;
-               for (int i=0;i<br;i++)
-               {
-                   if (x!=xM[i] && y!=yM[i])brm++;
-               }
-          System.out.println(br);
-          if (brm==br)
+      String xV=xCor.getText();
+      String yV=yCor.getText();
+      Graphics g=grid.getGraphics();
+      g.setColor(Color.red);
+      String v="";
+      int x;
+      int y;
+      try{
+          x=Integer.parseInt(xV);
+          y=Integer.parseInt(yV);
+      }
+      catch(NumberFormatException e){
+          JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
+          return;
+      }
+      catch(InputMismatchException e){
+          JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
+          return;
+      } 
+      int brm=0;
+      int xy=10*x+y;
+      for (int i=0;i<br;i++)
+      {
+          if (xy!=pr[i])brm++;
+      }
+      if (brm==br)
+      {
+          if (Ligma.Guess(x-1,y-1,sP).equals("h"))
           {
-              if (Ligma.Guess(x-1,y-1,sP).equals("h"))
-           {
-               br++;
-               brc++;
-               JOptionPane.showMessageDialog(null, "Право в мишената.","Удар",JOptionPane.PLAIN_MESSAGE);
-               circle(x,y,g);
-               String b=Integer.toString(br);
-               points.setText(b);
-               if (brc==14)
-               {
-                   String ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-10 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
-                   while (Ligma.SetName(ime).equals("Invalid name"))
-                   {
-                       JOptionPane.showMessageDialog(null, "Виж критериите и опитай пак","Невалидно име",JOptionPane.WARNING_MESSAGE);
-                       ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-11 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
-                   }
-                   Ligma.SetScore(br);
-                   try {
-                       Scoreboard AnS=new Scoreboard();
-                       AnS.AddNSort(Ligma);
-                   } catch (FileNotFoundException ex) {
-                   }
-                   new start().setVisible(true);
-                   dispose();
-               }
+              pr[br]=xy;
+              br++;
+              brc++;
+              JOptionPane.showMessageDialog(null, "Право в мишената.","Удар",JOptionPane.PLAIN_MESSAGE);
+              circle(x,y,g);
+              String b=Integer.toString(br);
+              points.setText(b);
+              if (brc==14)
+              {
+                  String ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-10 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
+                  while (Ligma.SetName(ime).equals("Invalid name"))
+                  {
+                      JOptionPane.showMessageDialog(null, "Виж критериите и опитай пак","Невалидно име",JOptionPane.WARNING_MESSAGE);
+                      ime=JOptionPane.showInputDialog(null,"Напиши си името. Трябва да е между 3-10 ЛАТИНСКИ букви, първата трябва да е ГЛАВНА.","ПОБЕДААААААА!!!!!",JOptionPane.INFORMATION_MESSAGE);
+                  }
+                  Ligma.SetScore(br);
+                  try {
+                      Scoreboard AnS=new Scoreboard();
+                      AnS.AddNSort(Ligma);
+                  } catch (FileNotFoundException ex) {
+                  }
+                  new start().setVisible(true);
+                  dispose();
+              }
            }
            else if(Ligma.Guess(x-1, y-1, sP).equals("m"))
            {
-                   br++;
-                   JOptionPane.showMessageDialog(null, "Тук няма кораб","Пропуск",JOptionPane.PLAIN_MESSAGE);
-                   hiks(x,y,g);
-                   String b=Integer.toString(br);
-                   points.setText(b);     
-       }
+               pr[br]=xy;
+               br++;
+               JOptionPane.showMessageDialog(null, "Тук няма кораб","Пропуск",JOptionPane.PLAIN_MESSAGE);
+               hiks(x,y,g);
+               String b=Integer.toString(br);
+               points.setText(b);     
+           }
            else JOptionPane.showMessageDialog(null, "Виж критериите.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
            }
-          
-           else
-           {
-               JOptionPane.showMessageDialog(null, "Тези кординати са били въвеждани тази игра.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
-           }
-          brm=0;
-                    System.out.println(br);
-
+      else
+      {
+          JOptionPane.showMessageDialog(null, "Тези кординати са били въвеждани тази игра.","Невалидни кординати",JOptionPane.PLAIN_MESSAGE);
+      }
+      brm=0;
     }//GEN-LAST:event_shootActionPerformed
-
     private void beginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginActionPerformed
-        points.setText("0");
-        for (int i=0;i<10;i++)
+    points.setText("0");
+    for (int i=0;i<10;i++)
+    {
+        for (int j=0;j<10;j++)
         {
-            for (int j=0;j<10;j++)
-            {
-                sP[i][j]=null;
-            }
+            sP[i][j]=null;
         }
-        int y=grid.getHeight();
-                int x=grid.getWidth();
-                Graphics g=grid.getGraphics();
-                g.setColor(Color.black);
-                for (int i=0;i<=x;i+=x/10)
-                {
-                    for (int j=0;j<=y;j+=y/10)
-                    {
-                        g.drawLine(i,j,i,y);
-                        g.drawLine(i, j, x, j);
-                    }
-                }
-                g.drawLine(x-1,0,x-1,y-1);
-                g.drawLine(0, y-1, x-1, y-1);
-               
-         sS.PlaceParts(sP);
-         sS.PlaceParts(sP);
-         mS.PlaceParts(sP);
-         mS.PlaceParts(sP);
-         bS.PlaceParts(sP);
-         for (int i=0;i<10;i++)
-         {
-             for (int j=0;j<10;j++)
-             {
-                 if (j!=9)
-                 {
-                     if(sP[i][j]==null)System.out.print(0+" ");
-                     else System.out.print(1+" ");
-                 }
-                 else
-                 {
-                     if(sP[i][j]==null)System.out.print(0);
-                     else System.out.print(1);
-                 }
-             }
-             System.out.println();
-         }
-// begin.setVissible(false);
+    }
+    cherti();
+    int x=grid.getWidth();
+    int y=grid.getHeight();
+    Graphics g=grid.getGraphics();
+    g.drawLine(x-1,0,x-1,y-1);
+    g.drawLine(0, y-1, x-1, y-1);          
+    sS.PlaceParts(sP);
+    sS.PlaceParts(sP);
+    mS.PlaceParts(sP);
+    mS.PlaceParts(sP);
+    bS.PlaceParts(sP);
+//    for (int i=0;i<10;i++)
+//    {
+//       for (int j=0;j<10;j++)
+//        {
+//           if (j!=9)
+//           {
+//              if(sP[i][j]==null)System.out.print(0+" ");
+//              else System.out.print(1+" ");
+//           }
+//           else
+//           {
+//              if(sP[i][j]==null)System.out.print(0);
+//              else System.out.print(1);
+//           }
+//        }
+//        System.out.println();
+//    }
+begin.setVisible(false);
+shoot.setEnabled(true);
     }//GEN-LAST:event_beginActionPerformed
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton begin;
     private javax.swing.JPanel grid;
